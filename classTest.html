@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>js quiz</title>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="./person.js"></script>
+
+<style>
+div.fail {
+    background-color: #d9534f;
+}
+
+div.success{
+    background-color: #4cae4c;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Class test</h1>
+<hr>
+<div class="well fail test01">var man = new Person('alex');man.getName()==='alex';</div>
+<div class="well fail test02">var man = new Person('alex');man.setName('mat');man.getName()==='mat';</div>
+<div class="well fail test03">var man = new FullPerson('alex');man.setName('mat');man.setSirName('Damon');<br/>
+man.getFullName() === 'mat Damon';</div>
+<div class="well fail test04">Person.prototype.sayHi = function(){return 'hi';};<br/>
+var man = new FullPerson('alex', 'prager');man.sayHi() === 'hi';</div>
+<div class="well fail test05">var kim = Soldier('kim'),lee = Soldier('lee');kim.getName() === lee.getName();</div>
+
+</div>
+<script>
+(function(flag) {
+    var result = false;
+
+    var man = new Person('alex'),
+        anotherMan = new Person('mat');
+    
+    result = (man.getName() === 'alex' && anotherMan.getName() === 'mat');
+
+    
+    if(result) {
+        flag.removeClass('fail').addClass('success');
+    }
+})($('.test01'));
+
+(function(flag) {
+    var result = false;
+
+    var man = new Person('alex');
+
+    man.setName('mat');
+    
+    result = (man.getName() === 'mat');
+
+    
+    if(result) {
+        flag.removeClass('fail').addClass('success');
+    }
+})($('.test02'));
+
+(function(flag) {
+    var result = false;
+
+    var man = new FullPerson('alex');
+
+    man.setName('mat');
+    man.setSirName('Damon');
+    
+    result = (man.getFullName() === 'mat Damon');
+
+    
+    if(result) {
+        flag.removeClass('fail').addClass('success');
+    }
+})($('.test03'));
+
+(function(flag) {
+    var result = false;
+
+    Person.prototype.sayHi = function(){return 'hi';};
+
+    var man = new FullPerson('alex', 'prager');
+
+    
+    result = (man.sayHi() === 'hi');
+
+    
+    if(result) {
+        flag.removeClass('fail').addClass('success');
+    }
+})($('.test04'));
+
+(function(flag) {
+    var result = false;
+
+    var kim = Soldier('kim'),
+        lee = Soldier('lee');
+
+    
+    result = (kim.getName() === lee.getName());
+
+    
+    if(result) {
+        flag.removeClass('fail').addClass('success');
+    }
+})($('.test05'));
+</script>
+</body>
+</html>
